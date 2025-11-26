@@ -1,0 +1,33 @@
+Model	Organisation
+ChatGPT 3.5	OpenAI
+Bing Chat	Microsoft
+LLaMA	Meta
+LaMDA	Google
+GPT 4	OpenAI
+Claude	Anthropic
+Copilot	Microsoft
+PaLM 2	Google
+LLaMA 2	Meta
+Claude 2	Anthropic
+GPT 4 Turbo	OpenAI
+Gemini	Google
+GPT 4.1	OpenAI
+Gemini 1.5	Google
+Sora	OpenAI
+Grok	xAI
+Claude 3	Anthropic
+LLaMA 3	Meta
+GPT-4o	OpenAI
+Claude 3.5	Anthropic
+LLaMA 3 (405B)	Meta
+Phi 4	Microsoft
+o1	OpenAI
+DeepSeek V3	DeepSeek
+o3	OpenAI
+Gemini 2	Google
+DeepSeek R1	DeepSeek
+o4	OpenAI
+LLaMA 4	Meta
+Claude 4	Anthropic
+Google Veo	Google
+Grok 3	xAI

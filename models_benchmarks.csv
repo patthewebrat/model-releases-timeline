@@ -1,0 +1,25 @@
+Quarter,Model,Organisation,Date,MMLU,HLE,Notes,Comments
+Q4 2022,ChatGPT 3.5,OpenAI,11/30/22,70.00%,,Pre-HLE,LLms hit the mainstream
+Q1 2023,Bing Chat,Microsoft,2/7/23,~86%,,Uses GPT-4,
+Q1 2023,LLaMA,Meta,2/24/23,63.40%,,65B model,
+Q1 2023,GPT 4,OpenAI,3/14/23,86.40%,,Pre-HLE,
+Q2 2023,PaLM 2,Google,5/10/23,81.20%,,Pre-HLE,
+Q4 2023,Grok,xAI,11/4/23,73.00%,,Grok-1,
+Q4 2023,Gemini,Google,12/6/23,90.00%,,Ultra CoT@32,
+Q1 2024,Sora,OpenAI,2/15/24,,,Video model,
+Q1 2024,Claude 3,Anthropic,3/4/24,86.80%,,Opus,
+Q2 2024,GPT-4o,OpenAI,5/13/24,88.70%,,Pre-HLE,
+Q2 2024,Claude 3.5,Anthropic,6/20/24,88.70%,4.30%,Sonnet,
+Q3 2024,LLaMA 3 (405B),Meta,7/23/24,88.60%,,Pre-HLE,
+Q3 2024,o1,OpenAI,9/12/24,92.30%,9.10%,Reasoning,
+Q4 2024,Gemini 2,Google,12/11/24,76.40%,,Flash MMLU-Pro,
+Q4 2024,DeepSeek V3,DeepSeek,12/26/24,88.50%,~3%,,
+Q1 2025,DeepSeek R1,DeepSeek,1/20/25,90.80%,9.40%,,Deepseek release temporarily tanks the market
+Q1 2025,Grok 3,xAI,2/17/25,92.70%,~8%,,
+Q2 2025,LLaMA 4,Meta,4/5/25,85.50%,5.70%,Maverick,
+Q2 2025,Claude 4,Anthropic,5/22/25,88.80%,6.70%,Opus,
+Q3 2025,GPT-5,OpenAI,8/7/25,91.40%,25.30%,,
+Q3 2025,Claude Sonnet 4.5,Anthropic,9/29/25,89.10%,13.70%,w/thinking,
+Q3 2025,Sora 2,OpenAI,9/30/25,,,Video model,OpenAI demonstrate they are not totally focused on improving humanity
+Q4 2025,Gemini 3 Pro,Google,11/18/25,91.80%,37.50%,,
+Q4 2025,Claude Opus 4.5,Anthropic,11/24/25,90.80%,28.40%,w/thinking,
