@@ -24,11 +24,10 @@
         .timeline-container {
             position: relative;
             width: 100%;
-            height: 500px;
+            height: 550px;
             margin: 0 auto;
         }
 
-        /* Main horizontal timeline */
         .timeline-line {
             position: absolute;
             top: 220px;
@@ -38,7 +37,6 @@
             background: #333;
         }
 
-        /* Quarter section */
         .quarter {
             position: absolute;
             top: 0;
@@ -63,7 +61,6 @@
             white-space: nowrap;
         }
 
-        /* Model marker */
         .marker {
             position: absolute;
             top: 220px;
@@ -128,206 +125,218 @@
 </head>
 <body>
     <div class="timeline-wrapper">
-        <div class="timeline-container">
+        <div class="timeline-container" id="timeline">
             <div class="timeline-line"></div>
-
-            <!-- Quarter markers - 13 quarters from Q4 2022 to Q4 2025, spread across 97% width -->
-            <div class="quarter" style="left: 1.9%;"><div class="quarter-line"></div><div class="quarter-label">Q4 2022</div></div>
-            <div class="quarter" style="left: 9.6%;"><div class="quarter-line"></div><div class="quarter-label">Q1 2023</div></div>
-            <div class="quarter" style="left: 17.3%;"><div class="quarter-line"></div><div class="quarter-label">Q2 2023</div></div>
-            <div class="quarter" style="left: 25%;"><div class="quarter-line"></div><div class="quarter-label">Q3 2023</div></div>
-            <div class="quarter" style="left: 32.7%;"><div class="quarter-line"></div><div class="quarter-label">Q4 2023</div></div>
-            <div class="quarter" style="left: 40.4%;"><div class="quarter-line"></div><div class="quarter-label">Q1 2024</div></div>
-            <div class="quarter" style="left: 48.1%;"><div class="quarter-line"></div><div class="quarter-label">Q2 2024</div></div>
-            <div class="quarter" style="left: 55.8%;"><div class="quarter-line"></div><div class="quarter-label">Q3 2024</div></div>
-            <div class="quarter" style="left: 63.5%;"><div class="quarter-line"></div><div class="quarter-label">Q4 2024</div></div>
-            <div class="quarter" style="left: 71.2%;"><div class="quarter-line"></div><div class="quarter-label">Q1 2025</div></div>
-            <div class="quarter" style="left: 78.9%;"><div class="quarter-line"></div><div class="quarter-label">Q2 2025</div></div>
-            <div class="quarter" style="left: 86.6%;"><div class="quarter-line"></div><div class="quarter-label">Q3 2025</div></div>
-            <div class="quarter" style="left: 94.3%;"><div class="quarter-line"></div><div class="quarter-label">Q4 2025</div></div>
-
-            <!-- Q4 2022: ChatGPT 3.5 (11/30/22) - ~70% through Q4 -->
-            <div class="marker" style="left: 6.5%;">
-                <div class="marker-dot"></div>
-                <div class="marker-stem above" style="height: 50px;"></div>
-                <div class="marker-label above" style="bottom: 58px;">OpenAI / ChatGPT 3.5</div>
-                <div class="marker-comment">LLMs hit the mainstream</div>
-            </div>
-
-            <!-- Q1 2023: Bing Chat (2/7/23) - ~40% through Q1 -->
-            <div class="marker" style="left: 12.7%;">
-                <div class="marker-dot"></div>
-                <div class="marker-stem above" style="height: 65px;"></div>
-                <div class="marker-label above" style="bottom: 73px;">Microsoft / Bing Chat</div>
-            </div>
-
-            <!-- Q1 2023: LLaMA (2/24/23) - ~60% through Q1 -->
-            <div class="marker" style="left: 14.2%;">
-                <div class="marker-dot"></div>
-                <div class="marker-stem below" style="height: 50px;"></div>
-                <div class="marker-label below" style="top: 58px;">Meta / LLaMA</div>
-            </div>
-
-            <!-- Q1 2023: GPT 4 (3/14/23) - ~80% through Q1 -->
-            <div class="marker" style="left: 15.7%;">
-                <div class="marker-dot"></div>
-                <div class="marker-stem above" style="height: 85px;"></div>
-                <div class="marker-label above" style="bottom: 93px;">OpenAI / GPT 4</div>
-            </div>
-
-            <!-- Q1 2023: Claude (3/14/23) -->
-            <div class="marker" style="left: 16.5%;">
-                <div class="marker-dot"></div>
-                <div class="marker-stem below" style="height: 65px;"></div>
-                <div class="marker-label below" style="top: 73px;">Anthropic / Claude</div>
-            </div>
-
-            <!-- Q2 2023: PaLM 2 (5/10/23) - ~45% through Q2 -->
-            <div class="marker" style="left: 20.8%;">
-                <div class="marker-dot"></div>
-                <div class="marker-stem above" style="height: 55px;"></div>
-                <div class="marker-label above" style="bottom: 63px;">Google / PaLM 2</div>
-                <div class="marker-comment">Despite inventing the technology, Google are late to the game</div>
-            </div>
-
-            <!-- Q4 2023: Grok (11/4/23) - ~40% through Q4 -->
-            <div class="marker" style="left: 35.8%;">
-                <div class="marker-dot"></div>
-                <div class="marker-stem above" style="height: 50px;"></div>
-                <div class="marker-label above" style="bottom: 58px;">xAI / Grok</div>
-            </div>
-
-            <!-- Q4 2023: Gemini (12/6/23) - ~75% through Q4 -->
-            <div class="marker" style="left: 38.5%;">
-                <div class="marker-dot"></div>
-                <div class="marker-stem below" style="height: 50px;"></div>
-                <div class="marker-label below" style="top: 58px;">Google / Gemini</div>
-            </div>
-
-            <!-- Q1 2024: Sora (2/15/24) - ~50% through Q1 -->
-            <div class="marker" style="left: 44.2%;">
-                <div class="marker-dot"></div>
-                <div class="marker-stem above" style="height: 65px;"></div>
-                <div class="marker-label above" style="bottom: 73px;">OpenAI / Sora</div>
-                <div class="marker-comment">The first credible video production model</div>
-            </div>
-
-            <!-- Q1 2024: Claude 3 (3/4/24) - ~70% through Q1 -->
-            <div class="marker" style="left: 45.8%;">
-                <div class="marker-dot"></div>
-                <div class="marker-stem below" style="height: 50px;"></div>
-                <div class="marker-label below" style="top: 58px;">Anthropic / Claude 3</div>
-            </div>
-
-            <!-- Q2 2024: GPT-4o (5/13/24) - ~45% through Q2 -->
-            <div class="marker" style="left: 51.6%;">
-                <div class="marker-dot"></div>
-                <div class="marker-stem above" style="height: 50px;"></div>
-                <div class="marker-label above" style="bottom: 58px;">OpenAI / GPT 4o</div>
-            </div>
-
-            <!-- Q2 2024: Claude 3.5 Sonnet (6/20/24) - ~88% through Q2 -->
-            <div class="marker" style="left: 54.6%;">
-                <div class="marker-dot"></div>
-                <div class="marker-stem below" style="height: 65px;"></div>
-                <div class="marker-label below" style="top: 73px;">Anthropic / Claude 3.5 Sonnet</div>
-            </div>
-
-            <!-- Q3 2024: LLaMA 3 405B (7/23/24) - ~25% through Q3 -->
-            <div class="marker" style="left: 57.7%;">
-                <div class="marker-dot"></div>
-                <div class="marker-stem above" style="height: 55px;"></div>
-                <div class="marker-label above" style="bottom: 63px;">Meta / LLaMA 3 (405B)</div>
-            </div>
-
-            <!-- Q3 2024: o1 (9/12/24) - ~80% through Q3 -->
-            <div class="marker" style="left: 62%;"><div class="marker-dot"></div>
-                <div class="marker-stem below" style="height: 50px;"></div>
-                <div class="marker-label below" style="top: 58px;">OpenAI / o1 preview</div>
-                <div class="marker-comment">Reasoning models introduced</div>
-            </div>
-
-            <!-- Q4 2024: Gemini 2 (12/11/24) - ~78% through Q4 -->
-            <div class="marker" style="left: 69.5%;">
-                <div class="marker-dot"></div>
-                <div class="marker-stem above" style="height: 50px;"></div>
-                <div class="marker-label above" style="bottom: 58px;">Google / Gemini 2</div>
-            </div>
-
-            <!-- Q4 2024: DeepSeek V3 (12/26/24) - ~95% through Q4 -->
-            <div class="marker" style="left: 70.8%;">
-                <div class="marker-dot"></div>
-                <div class="marker-stem below" style="height: 65px;"></div>
-                <div class="marker-label below" style="top: 73px;">DeepSeek / DeepSeek V3</div>
-            </div>
-
-            <!-- Q1 2025: DeepSeek R1 (1/20/25) - ~22% through Q1 -->
-            <div class="marker" style="left: 72.9%;">
-                <div class="marker-dot"></div>
-                <div class="marker-stem above" style="height: 75px;"></div>
-                <div class="marker-label above" style="bottom: 83px;">DeepSeek / DeepSeek R1</div>
-                <div class="marker-comment">Deepseek release temporarily tanks the market</div>
-            </div>
-
-            <!-- Q1 2025: Grok 3 (2/17/25) - ~52% through Q1 -->
-            <div class="marker" style="left: 75.2%;">
-                <div class="marker-dot"></div>
-                <div class="marker-stem below" style="height: 50px;"></div>
-                <div class="marker-label below" style="top: 58px;">xAI / Grok 3</div>
-                <div class="marker-comment" style="top: 245px;">Grok3 smashes all benchmarks, trained on synthetic data</div>
-            </div>
-
-            <!-- Q2 2025: LLaMA 4 (4/5/25) - ~5% through Q2 -->
-            <div class="marker" style="left: 79.3%;">
-                <div class="marker-dot"></div>
-                <div class="marker-stem above" style="height: 50px;"></div>
-                <div class="marker-label above" style="bottom: 58px;">Meta / LLaMA 4</div>
-            </div>
-
-            <!-- Q2 2025: Claude 4 (5/22/25) - ~55% through Q2 -->
-            <div class="marker" style="left: 83.1%;">
-                <div class="marker-dot"></div>
-                <div class="marker-stem below" style="height: 50px;"></div>
-                <div class="marker-label below" style="top: 58px;">Anthropic / Claude 4</div>
-            </div>
-
-            <!-- Q3 2025: GPT-5 (8/7/25) - ~40% through Q3 -->
-            <div class="marker" style="left: 89.7%;">
-                <div class="marker-dot"></div>
-                <div class="marker-stem above" style="height: 55px;"></div>
-                <div class="marker-label above" style="bottom: 63px;">OpenAI / GPT-5</div>
-            </div>
-
-            <!-- Q3 2025: Claude Sonnet 4.5 (9/29/25) - ~98% through Q3 -->
-            <div class="marker" style="left: 94.1%;">
-                <div class="marker-dot"></div>
-                <div class="marker-stem below" style="height: 65px;"></div>
-                <div class="marker-label below" style="top: 73px;">Anthropic / Claude Sonnet 4.5</div>
-            </div>
-
-            <!-- Q3 2025: Sora 2 (9/30/25) - ~99% through Q3 -->
-            <div class="marker" style="left: 94.2%;">
-                <div class="marker-dot"></div>
-                <div class="marker-stem above" style="height: 85px;"></div>
-                <div class="marker-label above" style="bottom: 93px;">OpenAI / Sora 2</div>
-                <div class="marker-comment">OpenAI demonstrate they are not totally focused on improving humanity</div>
-            </div>
-
-            <!-- Q4 2025: Gemini 3 Pro (11/18/25) - ~55% through Q4 -->
-            <div class="marker" style="left: 97.3%;">
-                <div class="marker-dot"></div>
-                <div class="marker-stem below" style="height: 50px;"></div>
-                <div class="marker-label below" style="top: 58px;">Google / Gemini 3 Pro</div>
-            </div>
-
-            <!-- Q4 2025: Claude Opus 4.5 (11/24/25) - ~60% through Q4 -->
-            <div class="marker" style="left: 98.1%;">
-                <div class="marker-dot"></div>
-                <div class="marker-stem above" style="height: 65px;"></div>
-                <div class="marker-label above" style="bottom: 73px;">Anthropic / Claude Opus 4.5</div>
-            </div>
-
         </div>
     </div>
+
+    <script>
+        // Parse CSV and build timeline
+        async function loadTimeline() {
+            const response = await fetch('models_benchmarks.csv');
+            const csvText = await response.text();
+            const lines = csvText.trim().split('\n');
+
+            // Find column indices
+            const headerRow = parseCSVLine(lines[0]);
+            const modelIdx = headerRow.indexOf('Model');
+            const orgIdx = headerRow.indexOf('Organisation');
+            const dateIdx = headerRow.indexOf('Date');
+            const commentsIdx = headerRow.indexOf('Comments');
+
+            // Parse data rows
+            const models = [];
+            for (let i = 1; i < lines.length; i++) {
+                // Handle CSV with potential commas in fields
+                const row = parseCSVLine(lines[i]);
+                if (row.length > dateIdx) {
+                    const dateStr = row[dateIdx];
+                    if (dateStr && dateStr.match(/\d+\/\d+\/\d+/)) {
+                        const comment = commentsIdx >= 0 && row.length > commentsIdx ? row[commentsIdx] : '';
+                        models.push({
+                            model: row[modelIdx],
+                            org: row[orgIdx],
+                            date: dateStr,
+                            comment: comment
+                        });
+                    }
+                }
+            }
+
+            // Sort by date
+            models.sort((a, b) => parseDate(a.date) - parseDate(b.date));
+
+            // Calculate date range for quarters
+            const dates = models.map(m => parseDate(m.date));
+            const minDate = new Date(Math.min(...dates));
+            const maxDate = new Date(Math.max(...dates));
+
+            // Generate quarters from min to max
+            const quarters = generateQuarters(minDate, maxDate);
+
+            // Render timeline
+            renderTimeline(quarters, models);
+        }
+
+        function parseCSVLine(line) {
+            const result = [];
+            let current = '';
+            let inQuotes = false;
+
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    result.push(current.trim());
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            result.push(current.trim());
+            return result;
+        }
+
+        function parseDate(dateStr) {
+            const parts = dateStr.split('/');
+            const month = parseInt(parts[0]);
+            const day = parseInt(parts[1]);
+            let year = parseInt(parts[2]);
+            if (year < 100) year += 2000;
+            return new Date(year, month - 1, day);
+        }
+
+        function getQuarter(date) {
+            const month = date.getMonth();
+            const quarter = Math.floor(month / 3) + 1;
+            return { q: quarter, year: date.getFullYear() };
+        }
+
+        function generateQuarters(minDate, maxDate) {
+            const quarters = [];
+            let current = new Date(minDate);
+            current.setDate(1);
+            current.setMonth(Math.floor(current.getMonth() / 3) * 3);
+
+            while (current <= maxDate) {
+                const q = getQuarter(current);
+                quarters.push({
+                    label: `Q${q.q} ${q.year}`,
+                    year: q.year,
+                    quarter: q.q,
+                    startDate: new Date(current)
+                });
+                current.setMonth(current.getMonth() + 3);
+            }
+
+            // Add one more quarter at the end for spacing
+            const q = getQuarter(current);
+            quarters.push({
+                label: `Q${q.q} ${q.year}`,
+                year: q.year,
+                quarter: q.q,
+                startDate: new Date(current)
+            });
+
+            return quarters;
+        }
+
+        function getPositionInTimeline(date, quarters) {
+            const totalQuarters = quarters.length;
+            const firstQuarterStart = quarters[0].startDate;
+            const lastQuarterStart = quarters[quarters.length - 1].startDate;
+
+            // Find which quarter this date falls in
+            for (let i = 0; i < quarters.length - 1; i++) {
+                const qStart = quarters[i].startDate;
+                const qEnd = quarters[i + 1].startDate;
+
+                if (date >= qStart && date < qEnd) {
+                    // Calculate position within quarter (0-1)
+                    const quarterDuration = qEnd - qStart;
+                    const posInQuarter = (date - qStart) / quarterDuration;
+
+                    // Calculate overall position (percentage)
+                    const quarterWidth = 97 / (totalQuarters);
+                    const basePos = 1.9 + (i * quarterWidth);
+                    return basePos + (posInQuarter * quarterWidth);
+                }
+            }
+
+            // Fallback for dates in last quarter
+            const lastIdx = quarters.length - 1;
+            const quarterWidth = 97 / totalQuarters;
+            return 1.9 + (lastIdx * quarterWidth);
+        }
+
+        function renderTimeline(quarters, models) {
+            const container = document.getElementById('timeline');
+            const totalQuarters = quarters.length;
+            const quarterWidth = 97 / totalQuarters;
+
+            // Render quarter markers
+            quarters.forEach((q, i) => {
+                const pos = 1.9 + (i * quarterWidth);
+                const quarterDiv = document.createElement('div');
+                quarterDiv.className = 'quarter';
+                quarterDiv.style.left = `${pos}%`;
+                quarterDiv.innerHTML = `
+                    <div class="quarter-line"></div>
+                    <div class="quarter-label">${q.label}</div>
+                `;
+                container.appendChild(quarterDiv);
+            });
+
+            // Track positions for collision detection
+            const usedPositions = [];
+            const commentRows = {}; // Track which row each comment should go in
+
+            // Render model markers
+            models.forEach((model, idx) => {
+                const date = parseDate(model.date);
+                const pos = getPositionInTimeline(date, quarters);
+
+                // Alternate above/below based on index
+                const isAbove = idx % 2 === 0;
+
+                // Vary stem heights to avoid overlap
+                const stemHeights = [50, 65, 80, 55, 70];
+                const stemHeight = stemHeights[idx % stemHeights.length];
+
+                const marker = document.createElement('div');
+                marker.className = 'marker';
+                marker.style.left = `${pos}%`;
+
+                const label = `${model.org} / ${model.model}`;
+
+                let html = `
+                    <div class="marker-dot"></div>
+                    <div class="marker-stem ${isAbove ? 'above' : 'below'}" style="height: ${stemHeight}px;"></div>
+                    <div class="marker-label ${isAbove ? 'above' : 'below'}" style="${isAbove ? 'bottom' : 'top'}: ${stemHeight + 8}px;">${label}</div>
+                `;
+
+                // Add comment if exists
+                if (model.comment) {
+                    // Check for nearby comments and stagger if needed
+                    let commentTop = 180;
+                    for (const [usedPos, row] of Object.entries(commentRows)) {
+                        if (Math.abs(parseFloat(usedPos) - pos) < 8) {
+                            commentTop = Math.max(commentTop, row + 65);
+                        }
+                    }
+                    commentRows[pos] = commentTop;
+
+                    html += `<div class="marker-comment" style="top: ${commentTop}px;">${model.comment}</div>`;
+                }
+
+                marker.innerHTML = html;
+                container.appendChild(marker);
+            });
+        }
+
+        // Load timeline on page load
+        loadTimeline();
+    </script>
 </body>
 </html>
