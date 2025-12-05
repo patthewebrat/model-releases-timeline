@@ -2,6 +2,8 @@
 
 An interactive visualization tracking the release dates and benchmark performance of major AI/LLM models from 2022 to present.
 
+[Live Demo](https://models.indulge.digital) | [GitHub](https://github.com/patthewebrat/model-releases-timeline)
+
 ## Features
 
 - **Timeline view**: Visual timeline showing model releases by quarter with organization and model names
