@@ -25,7 +25,7 @@
         .chart-container {
             position: relative;
             width: 100%;
-            height: 250px;
+            height: 400px;
             margin-bottom: 60px;
         }
 
@@ -209,19 +209,52 @@
             position: absolute;
             font-size: 13px;
             color: #555;
-            max-width: 110px;
+            width: 130px;
             line-height: 1.3;
             text-align: left;
-            top: 110px;
+            top: 200px;
             transform: translateX(-50%);
+        }
+
+        /* Footer styles */
+        .footer {
+            background: #49346A;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+
+        body {
+            padding-bottom: 70px;
+        }
+
+        .footer-logo {
+            height: 30px;
+        }
+
+        .footer-right {
+            color: white;
+            font-size: 13px;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .footer-right span {
+            opacity: 0.9;
         }
     </style>
 </head>
 <body>
     <div class="page-wrapper">
         <div class="chart-container" id="chart">
-            <div class="chart-title">Benchmark Scores Over Time</div>
-            <div class="chart-legend">
+                        <div class="chart-legend">
                 <div class="legend-item">
                     <div class="legend-color" style="background: #2196F3;"></div>
                     <span>MMLU (%)</span>
@@ -237,6 +270,18 @@
             <div class="timeline-line"></div>
         </div>
     </div>
+
+    <footer class="footer">
+        <a href="https://indulge.digital" target="_blank">
+            <img src="https://indulge.digital/sites/all/themes/indulgev4/images/logo-light.svg" alt="Indulge" class="footer-logo">
+        </a>
+        <div class="footer-right">
+            <span><strong>AI Model Timeline</strong></span>
+            <span id="lastUpdated"></span>
+            <span>Built by Indulge</span>
+            <span id="copyright"></span>
+        </div>
+    </footer>
 
     <script>
         // Parse CSV and build timeline
@@ -548,15 +593,15 @@
                 `;
 
                 if (model.comment) {
-                    let commentTop = 130;
+                    let commentTop = 200;
                     for (const [usedPos, row] of Object.entries(commentRows)) {
                         if (Math.abs(parseFloat(usedPos) - pos) < 8) {
-                            commentTop = Math.max(commentTop, row + 65);
+                            commentTop = Math.max(commentTop, row + 90);
                         }
                     }
                     commentRows[pos] = commentTop;
 
-                    html += `<div class="marker-comment" style="top: ${commentTop}px;">${model.comment}</div>`;
+                    html += `<div class="marker-comment" style="top: ${commentTop}px;"><strong>${model.model}</strong><br>${model.comment}</div>`;
                 }
 
                 marker.innerHTML = html;
@@ -566,6 +611,24 @@
 
         // Load timeline on page load
         loadTimeline();
+
+        // Set copyright year
+        document.getElementById('copyright').textContent = `© ${new Date().getFullYear()} Indulge Digital`;
+
+        // Get last modified date from CSV
+        async function getLastModified() {
+            try {
+                const response = await fetch('models_benchmarks.csv', { method: 'HEAD' });
+                const lastModified = response.headers.get('Last-Modified');
+                if (lastModified) {
+                    const date = new Date(lastModified);
+                    document.getElementById('lastUpdated').textContent = `Last updated: ${date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}`;
+                }
+            } catch (e) {
+                console.log('Could not fetch last modified date');
+            }
+        }
+        getLastModified();
     </script>
 </body>
 </html>
