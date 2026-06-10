@@ -30,4 +30,11 @@ Q3 2025,Claude Sonnet 4.5,Anthropic,9/29/25,87.50%,11.52%,w/thinking,
 Q3 2025,Sora 2,OpenAI,9/30/25,,,Video model,OpenAI demonstrate they are not totally focused on improving humanity
 Q4 2025,Gemini 3 Pro,Google,11/18/25,89.80%,37.50%,,Triggers Code Red at OpenAI
 Q4 2025,Claude Opus 4.5,Anthropic,11/24/25,89.50%,,w/thinking,
-Q4 2025,Gemini 3 Deep Think,Google,12/4/25,93.8%,41.00%,Reasoning mode
+Q4 2025,Gemini 3 Deep Think,Google,12/4/25,93.8%,41.00%,Reasoning mode,
+Q1 2026,Claude Opus 4.6,Anthropic,2/5/26,91.10%,40.00%,w/thinking,
+Q1 2026,Gemini 3.1 Pro,Google,2/19/26,91.80%,44.70%,1M context,Google extends its lead into 2026 and tops ARC-AGI-2
+Q2 2026,Claude Opus 4.7,Anthropic,4/16/26,91.50%,46.90%,w/thinking,
+Q2 2026,GPT-5.5,OpenAI,4/23/26,92.40%,41.40%,Codename Spud,OpenAI answers with a 60% drop in hallucinations
+Q2 2026,Claude Opus 4.8,Anthropic,5/28/26,91.60%,49.80%,Dynamic workflows,
+Q2 2026,Claude Fable 5,Anthropic,6/9/26,92.30%,59.00%,Mythos-class,First Mythos-class model cleared for general use - a step change on HLE. Anthropic withheld the unrestricted Mythos 5 variant at launch over cybersecurity and biology misuse concerns, releasing it only to vetted defenders
+Q2 2026,Claude Mythos 5,Anthropic,6/9/26,,56.80%,Restricted release,
