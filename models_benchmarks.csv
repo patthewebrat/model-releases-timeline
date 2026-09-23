@@ -1,40 +1,51 @@
-Quarter,Model,Organisation,Date,MMLU,HLE,Notes,Comments
-Q4 2022,ChatGPT 3.5,OpenAI,11/30/22,46.20%,,Pre-HLE,LLMs hit the mainstream
-Q1 2023,Bing Chat,Microsoft,2/7/23,,,Uses GPT-4,
-Q1 2023,LLaMA,Meta,2/24/23,40.60%,,65B model,
-Q1 2023,Claude,Anthropic,3/14/23,43.40%,,,
-Q1 2023,GPT 4,OpenAI,3/14/23,69.40%,,Pre-HLE,
-Q2 2023,PaLM 2,Google,5/10/23,,,Pre-HLE,Google finally get on board having invented the tech in the first place
-Q3 2023,Claude 2,Anthropic,7/11/23,48.60%,,,
-Q4 2023,Grok,xAI,11/4/23,70.90%,,Grok-1,Elon surprises everyone with a competent LLM
-Q4 2023,Gemini,Google,12/6/23,43.10%,,Ultra CoT@32,
-Q1 2024,Sora,OpenAI,2/15/24,,,Video model,
-Q1 2024,Claude 3,Anthropic,3/4/24,69.60%,,Opus,
-Q2 2024,GPT-4o,OpenAI,5/13/24,80.30%,2.72%,Pre-HLE,OpenAI launch reasoning models that think harder and longer
-Q2 2024,Claude 3.5,Anthropic,6/20/24,75.10%,4.08%,Sonnet,
-Q3 2024,LLaMA 3 (405B),Meta,7/23/24,73.20%,,Pre-HLE,
-Q3 2024,o1,OpenAI,9/12/24,84.10%,8.12%,Reasoning,
-Q3 2024,Qwen2.5-72B,Alibaba,9/19/24,58.10%,,Open-source,
-Q4 2024,Gemini 2,Google,12/11/24,80.50%,6.56%,Flash MMLU-Pro,
-Q4 2024,DeepSeek V3,DeepSeek,12/26/24,83.30%,,,
-Q1 2025,DeepSeek R1,DeepSeek,1/20/25,84.40%,,,Deepseek release temporarily tanks the market
-Q1 2025,Qwen2.5-Max,Alibaba,1/29/25,76.10%,,MoE model,
-Q1 2025,Grok 3,xAI,2/17/25,79.90%,,,
-Q2 2025,LLaMA 4,Meta,4/5/25,80.90%,5.70%,Maverick,
-Q2 2025,GPT 4.1,OpenAI,4/14/25,80.60%,5.40%,,
-Q2 2025,Qwen3,Alibaba,4/28/25,80.60%,,235B MoE,
-Q2 2025,Claude 4,Anthropic,5/22/25,84.20%,6.70%,Opus,
-Q3 2025,Grok 4,xAI,7/9/25,87.00%,25.40%,,Achieved over 50% on HLE using tools
-Q3 2025,GPT-5,OpenAI,8/7/25,87.10%,25.30%,,
-Q3 2025,Claude Sonnet 4.5,Anthropic,9/29/25,87.50%,11.52%,w/thinking,
-Q3 2025,Sora 2,OpenAI,9/30/25,,,Video model,OpenAI demonstrate they are not totally focused on improving humanity
-Q4 2025,Gemini 3 Pro,Google,11/18/25,89.80%,37.50%,,Triggers Code Red at OpenAI
-Q4 2025,Claude Opus 4.5,Anthropic,11/24/25,89.50%,,w/thinking,
-Q4 2025,Gemini 3 Deep Think,Google,12/4/25,93.8%,41.00%,Reasoning mode,
-Q1 2026,Claude Opus 4.6,Anthropic,2/5/26,91.10%,40.00%,w/thinking,
-Q1 2026,Gemini 3.1 Pro,Google,2/19/26,91.80%,44.40%,1M context,Google extends its lead into 2026 and tops ARC-AGI-2
-Q2 2026,Claude Opus 4.7,Anthropic,4/16/26,91.50%,46.90%,w/thinking,
-Q2 2026,GPT-5.5,OpenAI,4/23/26,92.40%,41.40%,Codename Spud,OpenAI answers with a 60% drop in hallucinations
-Q2 2026,Claude Opus 4.8,Anthropic,5/28/26,,49.80%,Dynamic workflows,
-Q2 2026,Claude Fable 5,Anthropic,6/9/26,92.30%,59.00%,Mythos-class,First Mythos-class model cleared for general use - a step change on HLE. Anthropic withheld the unrestricted Mythos 5 variant at launch over cybersecurity and biology misuse concerns, releasing it only to vetted defenders
-Q2 2026,Claude Mythos 5,Anthropic,6/9/26,,56.80%,Restricted release,
+Quarter,Model,Organisation,Date,MMLU,GPQA,HLE,FrontierCode,Notes,Comments
+Q4 2022,ChatGPT 3.5,OpenAI,11/30/22,46.20%,28.10%,,,Pre-HLE,LLMs hit the mainstream
+Q1 2023,Bing Chat,Microsoft,2/7/23,,,,,Uses GPT-4,
+Q1 2023,LLaMA,Meta,2/24/23,40.60%,,,,65B model,
+Q1 2023,Claude,Anthropic,3/14/23,43.40%,,,,,
+Q1 2023,GPT 4,OpenAI,3/14/23,69.40%,35.70%,,,Pre-HLE,
+Q2 2023,PaLM 2,Google,5/10/23,,,,,Pre-HLE,Google finally get on board having invented the tech in the first place
+Q3 2023,Claude 2,Anthropic,7/11/23,48.60%,,,,,
+Q4 2023,Grok,xAI,11/4/23,70.90%,,,,Grok-1,Elon surprises everyone with a competent LLM
+Q4 2023,Gemini,Google,12/6/23,43.10%,,,,Ultra CoT@32,
+Q1 2024,Sora,OpenAI,2/15/24,,,,,Video model,
+Q1 2024,Claude 3,Anthropic,3/4/24,69.60%,50.40%,,,Opus,
+Q2 2024,GPT-4o,OpenAI,5/13/24,80.30%,53.60%,2.72%,,Pre-HLE,OpenAI launch reasoning models that think harder and longer
+Q2 2024,Claude 3.5,Anthropic,6/20/24,75.10%,59.40%,4.08%,,Sonnet,
+Q3 2024,LLaMA 3 (405B),Meta,7/23/24,73.20%,49.00%,,,Pre-HLE,
+Q3 2024,o1,OpenAI,9/12/24,84.10%,73.30%,8.12%,,Reasoning,
+Q3 2024,Qwen2.5-72B,Alibaba,9/19/24,58.10%,49.00%,,,Open-source,
+Q4 2024,Gemini 2,Google,12/11/24,80.50%,62.10%,6.56%,,Flash MMLU-Pro,
+Q4 2024,DeepSeek V3,DeepSeek,12/26/24,83.30%,59.10%,,,,
+Q1 2025,DeepSeek R1,DeepSeek,1/20/25,84.40%,71.50%,,,,Deepseek release temporarily tanks the market
+Q1 2025,Qwen2.5-Max,Alibaba,1/29/25,76.10%,60.10%,,,MoE model,
+Q1 2025,Grok 3,xAI,2/17/25,79.90%,84.60%,,,,
+Q2 2025,LLaMA 4,Meta,4/5/25,80.90%,69.80%,5.70%,,Maverick,
+Q2 2025,GPT 4.1,OpenAI,4/14/25,80.60%,66.30%,5.40%,,,
+Q2 2025,Qwen3,Alibaba,4/28/25,80.60%,71.10%,,,235B MoE,
+Q2 2025,Claude 4,Anthropic,5/22/25,84.20%,79.60%,6.70%,,Opus,
+Q3 2025,Grok 4,xAI,7/9/25,87.00%,87.50%,25.40%,,,Achieved over 50% on HLE using tools
+Q3 2025,GPT-5,OpenAI,8/7/25,87.10%,85.70%,25.30%,,,
+Q3 2025,Claude Sonnet 4.5,Anthropic,9/29/25,87.50%,83.40%,11.52%,,w/thinking,
+Q3 2025,Sora 2,OpenAI,9/30/25,,,,,Video model,OpenAI demonstrate they are not totally focused on improving humanity
+Q4 2025,Gemini 3 Pro,Google,11/18/25,89.80%,91.90%,37.50%,,,Triggers Code Red at OpenAI
+Q4 2025,Claude Opus 4.5,Anthropic,11/24/25,89.50%,87.00%,,,w/thinking,
+Q4 2025,Gemini 3 Deep Think,Google,12/4/25,93.8%,93.80%,41.00%,,Reasoning mode,
+Q1 2026,Claude Opus 4.6,Anthropic,2/5/26,91.10%,91.30%,40.00%,,w/thinking,
+Q1 2026,Gemini 3.1 Pro,Google,2/19/26,91.80%,94.30%,44.40%,,1M context,Google extends its lead into 2026 and tops ARC-AGI-2
+Q2 2026,Muse Spark,Meta,4/8/26,,89.50%,,,Meta Superintelligence Labs,
+Q2 2026,Claude Opus 4.7,Anthropic,4/16/26,91.50%,94.20%,46.90%,38.50%,w/thinking,
+Q2 2026,GPT-5.5,OpenAI,4/23/26,92.40%,93.60%,41.40%,43.00%,Codename Spud,OpenAI answers with a 60% drop in hallucinations
+Q2 2026,DeepSeek V4,DeepSeek,4/24/26,87.50%,90.10%,37.70%,17.60%,V4-Pro-Max MMLU-Pro; open weights,
+Q2 2026,Gemini 3.5 Flash,Google,5/19/26,,,40.20%,,Announced at I/O,
+Q2 2026,Claude Opus 4.8,Anthropic,5/28/26,,93.60%,49.80%,46.50%,Dynamic workflows,
+Q2 2026,Claude Fable 5,Anthropic,6/9/26,92.30%,,59.00%,53.50%,Mythos-class,First Mythos-class model cleared for general use - a step change on HLE. Anthropic withheld the unrestricted Mythos 5 variant at launch over cybersecurity and biology misuse concerns, releasing it only to vetted defenders
+Q2 2026,Claude Mythos 5,Anthropic,6/9/26,,94.10%,56.80%,,Restricted release,
+Q3 2026,GPT-5.6 Sol,OpenAI,7/9/26,,,,47.50%,Sol/Terra/Luna tiers,OpenAI stops publishing MMLU and splits its lineup into three tiers
+Q3 2026,Claude Opus 5,Anthropic,7/24/26,,,56.60%,48.00%,ARC-AGI-3 30.2%,
+Q3 2026,Qwen3.8-Max,Alibaba,8/3/26,,92.60%,,,2.4T params,
+Q3 2026,Claude Fable 5.1,Anthropic,9/1/26,,93.70%,60.90%,50.30%,Mythos 5.1 restricted,
+Q3 2026,Gemini 3.8 Flash,Google,9/2/26,,,,41.20%,Gemini 3.5 Pro still unreleased,Google ships three Flash models in six weeks while Gemini 3.5 Pro slips
+Q3 2026,GPT-6 Astra,OpenAI,9/3/26,,96.00%,,53.30%,HLE 57.2% w/tools only,OpenAI's largest training run and its first model rated Critical for cybersecurity
+Q3 2026,Grok 4.7,xAI,9/21/26,,,,,,
+Q3 2026,Claude Opus 5.5,Anthropic,9/22/26,,,61.40%,54.40%,HLE via Artificial Analysis,Opus 5.5 matches Fable 5.1 at 40% lower cost. OpenAI ships GPT-6 Sol and Luna 89 minutes later

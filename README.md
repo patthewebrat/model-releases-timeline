@@ -7,7 +7,7 @@ An interactive visualization tracking the release dates and benchmark performanc
 ## Features
 
 - **Timeline view**: Visual timeline showing model releases by quarter with organization and model names
-- **Benchmark chart**: Dual-axis chart displaying MMLU and HLE (Humanity's Last Exam) scores over time
+- **Benchmark chart**: Dual-axis chart with MMLU and GPQA Diamond (saturated benchmarks) on the left axis, HLE and FrontierCode (frontier benchmarks) on the right
 - **Comments**: Notable events and context for significant releases
 - **Dynamic data**: Reads from CSV file for easy updates
 
@@ -22,7 +22,9 @@ The timeline data is stored in `models_benchmarks.csv` with the following column
 | Organisation | Company/organization |
 | Date | Release date (MM/DD/YY) |
 | MMLU | MMLU benchmark score (%) |
+| GPQA | GPQA Diamond score (%) - PhD-level science questions |
 | HLE | Humanity's Last Exam score (%) |
+| FrontierCode | FrontierCode v1.1 Main score (%) - real-repo coding tasks graded on whether a maintainer would merge the change |
 | Notes | Additional notes about the model |
 | Comments | Notable events displayed on timeline |
 

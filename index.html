@@ -4,7 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Model Timeline | Indulge</title>
+    <link rel="icon" type="image/svg+xml" href="https://indulge.digital/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+        /* Indulge brand tokens, taken from indulge.digital */
+        :root {
+            --clr-stratos: #00103d;
+            --clr-biscay: #183159;
+            --clr-hoki: #637a9f;
+            --clr-emperor: #555555;
+            --clr-geyser: #dbe3e8;
+            --clr-white-lilac: #eef2f9;
+            --clr-scooter: #27b4d2;
+            --clr-brilliant-rose: #F8659F;
+            --clr-ecstasy: #f57e21;
+            --font-heading: "Montserrat", sans-serif;
+            --font-body: "Raleway", sans-serif;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,8 +31,9 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background: white;
+            font-family: var(--font-body);
+            color: var(--clr-stratos);
+            background: #ffffff;
             padding: 20px;
         }
 
@@ -35,8 +55,8 @@
             right: 1.5%;
             top: 30px;
             bottom: 30px;
-            border-left: 1px solid #ccc;
-            border-bottom: 1px solid #ccc;
+            border-left: 1px solid var(--clr-geyser);
+            border-bottom: 1px solid var(--clr-geyser);
         }
 
         .chart-title {
@@ -49,7 +69,7 @@
         .y-axis-label {
             position: absolute;
             font-size: 11px;
-            color: #666;
+            color: var(--clr-hoki);
             left: 0;
             transform: translateX(-100%) translateX(-5px);
         }
@@ -58,7 +78,7 @@
             position: absolute;
             left: 0;
             right: 0;
-            border-top: 1px dashed #eee;
+            border-top: 1px dashed var(--clr-white-lilac);
         }
 
         .chart-legend {
@@ -67,6 +87,8 @@
             right: 50px;
             display: flex;
             gap: 20px;
+            font-family: var(--font-heading);
+            font-weight: 500;
             font-size: 13px;
         }
 
@@ -79,6 +101,10 @@
         .legend-color {
             width: 20px;
             height: 3px;
+        }
+
+        .legend-dashed {
+            background: repeating-linear-gradient(90deg, currentColor 0 5px, transparent 5px 8px);
         }
 
         .data-point {
@@ -96,7 +122,7 @@
             bottom: 12px;
             left: 50%;
             transform: translateX(-50%);
-            background: #333;
+            background: var(--clr-stratos);
             color: white;
             padding: 4px 8px;
             border-radius: 4px;
@@ -128,7 +154,7 @@
             left: 1.5%;
             right: 1.5%;
             height: 2px;
-            background: #333;
+            background: var(--clr-stratos);
         }
 
         .quarter {
@@ -142,7 +168,7 @@
             left: 0;
             top: 10px;
             bottom: 20px;
-            border-left: 1px dashed #bbb;
+            border-left: 1px dashed var(--clr-geyser);
         }
 
         .quarter-label {
@@ -150,8 +176,10 @@
             top: 115px;
             left: 0;
             transform: translateX(-50%);
+            font-family: var(--font-heading);
+            font-weight: 600;
             font-size: 13px;
-            color: #333;
+            color: var(--clr-stratos);
             white-space: nowrap;
         }
 
@@ -164,7 +192,7 @@
             position: absolute;
             width: 8px;
             height: 8px;
-            background: #4CAF50;
+            background: var(--clr-scooter);
             border-radius: 50%;
             left: -4px;
             top: -3px;
@@ -174,7 +202,7 @@
         .marker-stem {
             position: absolute;
             width: 1px;
-            background: #333;
+            background: var(--clr-stratos);
             left: 0;
         }
 
@@ -189,7 +217,7 @@
         .marker-label {
             position: absolute;
             font-size: 12px;
-            color: #333;
+            color: var(--clr-stratos);
             white-space: nowrap;
             transform: rotate(-45deg);
             transform-origin: bottom left;
@@ -205,10 +233,16 @@
             transform-origin: top left;
         }
 
+        .marker-comment strong {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            color: var(--clr-stratos);
+        }
+
         .marker-comment {
             position: absolute;
             font-size: 13px;
-            color: #555;
+            color: var(--clr-emperor);
             width: 130px;
             line-height: 1.3;
             text-align: left;
@@ -219,7 +253,7 @@
 
         /* Footer styles */
         .footer {
-            background: #49346A;
+            background: var(--clr-stratos);
             padding: 15px 30px;
             display: flex;
             align-items: center;
@@ -236,7 +270,7 @@
         }
 
         .footer-logo {
-            height: 30px;
+            height: 24px;
         }
 
         .footer-left {
@@ -275,12 +309,20 @@
         <div class="chart-container" id="chart">
                         <div class="chart-legend">
                 <div class="legend-item">
-                    <div class="legend-color" style="background: #2196F3;"></div>
+                    <div class="legend-color" style="background: #27b4d2;"></div>
                     <span>MMLU (%)</span>
                 </div>
                 <div class="legend-item">
-                    <div class="legend-color" style="background: #FF5722;"></div>
-                    <span>HLE (%)</span>
+                    <div class="legend-color" style="background: #183159;"></div>
+                    <span>GPQA Diamond (%)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-dashed" style="color: #f57e21;"></div>
+                    <span>HLE (%, right axis)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-dashed" style="color: #F8659F;"></div>
+                    <span>FrontierCode (%, right axis)</span>
                 </div>
             </div>
             <div class="chart-area" id="chartArea"></div>
@@ -293,7 +335,7 @@
     <footer class="footer">
         <div class="footer-left">
             <a href="https://indulge.digital" target="_blank">
-                <img src="https://indulge.digital/sites/all/themes/indulgev4/images/logo-light.svg" alt="Indulge" class="footer-logo">
+                <img src="https://indulge.digital/img/logo-white.svg" alt="Indulge" class="footer-logo">
             </a>
             <span><strong>AI Model Timeline</strong></span>
             <span id="lastUpdated"></span>
@@ -307,6 +349,15 @@
     </footer>
 
     <script>
+        // Benchmarks to plot. Saturated benchmarks share the left axis;
+        // frontier benchmarks, where top models still score low, share the right.
+        const SERIES = [
+            { key: 'mmlu', column: 'MMLU', label: 'MMLU', color: '#27b4d2', axis: 'left' },
+            { key: 'gpqa', column: 'GPQA', label: 'GPQA Diamond', color: '#183159', axis: 'left' },
+            { key: 'hle', column: 'HLE', label: 'HLE', color: '#f57e21', axis: 'right' },
+            { key: 'frontiercode', column: 'FrontierCode', label: 'FrontierCode', color: '#F8659F', axis: 'right' }
+        ];
+
         // Parse CSV and build timeline
         async function loadTimeline() {
             const response = await fetch('models_benchmarks.csv');
@@ -318,8 +369,9 @@
             const modelIdx = headerRow.indexOf('Model');
             const orgIdx = headerRow.indexOf('Organisation');
             const dateIdx = headerRow.indexOf('Date');
-            const mmluIdx = headerRow.indexOf('MMLU');
-            const hleIdx = headerRow.indexOf('HLE');
+            const scoreIdx = Object.fromEntries(
+                SERIES.map(s => [s.key, headerRow.indexOf(s.column)])
+            );
             const commentsIdx = headerRow.indexOf('Comments');
 
             // Parse data rows
@@ -330,16 +382,16 @@
                     const dateStr = row[dateIdx];
                     if (dateStr && dateStr.match(/\d+\/\d+\/\d+/)) {
                         const comment = commentsIdx >= 0 && row.length > commentsIdx ? row[commentsIdx] : '';
-                        const mmlu = parsePercentage(row[mmluIdx]);
-                        const hle = parsePercentage(row[hleIdx]);
-                        models.push({
+                        const model = {
                             model: row[modelIdx],
                             org: row[orgIdx],
                             date: dateStr,
-                            comment: comment,
-                            mmlu: mmlu,
-                            hle: hle
+                            comment: comment
+                        };
+                        SERIES.forEach(s => {
+                            model[s.key] = scoreIdx[s.key] >= 0 ? parsePercentage(row[scoreIdx[s.key]]) : null;
                         });
+                        models.push(model);
                     }
                 }
             }
@@ -359,8 +411,8 @@
             renderChart(quarters, models);
             renderTimeline(quarters, models);
 
-            // Set last updated date from most recent model
-            const latestDate = new Date(Math.max(...dates));
+            // Set last updated date to today
+            const latestDate = new Date();
             document.getElementById('lastUpdated').textContent = `Last updated: ${latestDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}`;
         }
 
@@ -464,49 +516,44 @@
             const quarterWidth = 97 / totalQuarters;
 
             // Y-axis range - dynamically calculate from data
-            const mmluValues = models.map(m => m.mmlu).filter(v => v !== null);
-            const hleValues = models.map(m => m.hle).filter(v => v !== null);
+            const axisValues = axis => models.flatMap(m =>
+                SERIES.filter(s => s.axis === axis).map(s => m[s.key])
+            ).filter(v => v !== null);
 
-            const mmluMin = Math.floor(Math.min(...mmluValues) / 10) * 10; // Round down to nearest 10
-            const mmluMax = 100;
-            const hleMin = 0;
-            const hleMax = Math.ceil(Math.max(...hleValues) / 10) * 10; // Round up to nearest 10
+            const axes = {
+                left: { min: Math.floor(Math.min(...axisValues('left')) / 10) * 10, max: 100 }, // Round down to nearest 10
+                right: { min: 0, max: Math.ceil(Math.max(...axisValues('right')) / 10) * 10 } // Round up to nearest 10
+            };
+            const toY = (value, axis) => 100 - ((value - axes[axis].min) / (axes[axis].max - axes[axis].min)) * 100;
 
-            // Add Y-axis labels and grid lines for MMLU (left side)
-            for (let v = mmluMin; v <= mmluMax; v += 10) {
-                const yPercent = 100 - ((v - mmluMin) / (mmluMax - mmluMin)) * 100;
+            // Add Y-axis labels and grid lines (grid follows the left axis)
+            ['left', 'right'].forEach(axis => {
+                for (let v = axes[axis].min; v <= axes[axis].max; v += 10) {
+                    const yPercent = toY(v, axis);
 
-                const label = document.createElement('div');
-                label.className = 'y-axis-label';
-                label.style.bottom = `${100 - yPercent}%`;
-                label.style.color = '#2196F3';
-                label.textContent = `${v}%`;
-                chartArea.appendChild(label);
+                    const label = document.createElement('div');
+                    label.className = 'y-axis-label';
+                    label.style.bottom = `${100 - yPercent}%`;
+                    label.style.color = 'var(--clr-hoki)';
+                    if (axis === 'right') {
+                        label.style.right = '0';
+                        label.style.left = 'auto';
+                        label.style.transform = 'translateX(100%) translateX(5px)';
+                    }
+                    label.textContent = `${v}%`;
+                    chartArea.appendChild(label);
 
-                const gridLine = document.createElement('div');
-                gridLine.className = 'y-grid-line';
-                gridLine.style.bottom = `${100 - yPercent}%`;
-                chartArea.appendChild(gridLine);
-            }
-
-            // Add Y-axis labels for HLE (right side)
-            for (let v = hleMin; v <= hleMax; v += 10) {
-                const yPercent = 100 - ((v - hleMin) / (hleMax - hleMin)) * 100;
-
-                const label = document.createElement('div');
-                label.className = 'y-axis-label';
-                label.style.bottom = `${100 - yPercent}%`;
-                label.style.right = '0';
-                label.style.left = 'auto';
-                label.style.transform = 'translateX(100%) translateX(5px)';
-                label.style.color = '#FF5722';
-                label.textContent = `${v}%`;
-                chartArea.appendChild(label);
-            }
+                    if (axis === 'left') {
+                        const gridLine = document.createElement('div');
+                        gridLine.className = 'y-grid-line';
+                        gridLine.style.bottom = `${100 - yPercent}%`;
+                        chartArea.appendChild(gridLine);
+                    }
+                }
+            });
 
             // Collect data points for lines
-            const mmluPoints = [];
-            const hlePoints = [];
+            const points = Object.fromEntries(SERIES.map(s => [s.key, []]));
 
             models.forEach((model) => {
                 const date = parseDate(model.date);
@@ -514,62 +561,38 @@
                 // Convert from page percentage to chart area percentage
                 const chartXPercent = ((xPos - 1.5) / 97) * 100;
 
-                if (model.mmlu !== null) {
-                    const yPercent = 100 - ((model.mmlu - mmluMin) / (mmluMax - mmluMin)) * 100;
-                    mmluPoints.push({ x: chartXPercent, y: yPercent, model: model });
+                SERIES.forEach(s => {
+                    if (model[s.key] === null) return;
+                    const yPercent = toY(model[s.key], s.axis);
+                    points[s.key].push({ x: chartXPercent, y: yPercent, model: model });
 
                     const point = document.createElement('div');
                     point.className = 'data-point';
                     point.style.left = `${chartXPercent}%`;
                     point.style.top = `${yPercent}%`;
-                    point.style.background = '#2196F3';
-                    point.setAttribute('data-tooltip', `${model.model}: ${model.mmlu}% MMLU`);
+                    point.style.background = s.color;
+                    point.setAttribute('data-tooltip', `${model.model}: ${model[s.key]}% ${s.label}`);
                     chartArea.appendChild(point);
-                }
-
-                if (model.hle !== null) {
-                    const yPercent = 100 - ((model.hle - hleMin) / (hleMax - hleMin)) * 100;
-                    hlePoints.push({ x: chartXPercent, y: yPercent, model: model });
-
-                    const point = document.createElement('div');
-                    point.className = 'data-point';
-                    point.style.left = `${chartXPercent}%`;
-                    point.style.top = `${yPercent}%`;
-                    point.style.background = '#FF5722';
-                    point.setAttribute('data-tooltip', `${model.model}: ${model.hle}% HLE`);
-                    chartArea.appendChild(point);
-                }
+                });
             });
 
-            // Draw lines using SVG
+            // Draw lines using SVG. Right-axis series are dashed.
             const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
             svg.setAttribute('class', 'chart-line');
             svg.setAttribute('viewBox', '0 0 100 100');
             svg.setAttribute('preserveAspectRatio', 'none');
 
-            // MMLU line
-            if (mmluPoints.length > 1) {
-                const mmluPath = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
-                const mmluPathData = mmluPoints.map(p => `${p.x},${p.y}`).join(' ');
-                mmluPath.setAttribute('points', mmluPathData);
-                mmluPath.setAttribute('fill', 'none');
-                mmluPath.setAttribute('stroke', '#2196F3');
-                mmluPath.setAttribute('stroke-width', '0.3');
-                mmluPath.setAttribute('vector-effect', 'non-scaling-stroke');
-                svg.appendChild(mmluPath);
-            }
-
-            // HLE line
-            if (hlePoints.length > 1) {
-                const hlePath = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
-                const hlePathData = hlePoints.map(p => `${p.x},${p.y}`).join(' ');
-                hlePath.setAttribute('points', hlePathData);
-                hlePath.setAttribute('fill', 'none');
-                hlePath.setAttribute('stroke', '#FF5722');
-                hlePath.setAttribute('stroke-width', '0.3');
-                hlePath.setAttribute('vector-effect', 'non-scaling-stroke');
-                svg.appendChild(hlePath);
-            }
+            SERIES.forEach(s => {
+                if (points[s.key].length < 2) return;
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+                path.setAttribute('points', points[s.key].map(p => `${p.x},${p.y}`).join(' '));
+                path.setAttribute('fill', 'none');
+                path.setAttribute('stroke', s.color);
+                path.setAttribute('stroke-width', '1.5');
+                if (s.axis === 'right') path.setAttribute('stroke-dasharray', '6 4');
+                path.setAttribute('vector-effect', 'non-scaling-stroke');
+                svg.appendChild(path);
+            });
 
             chartArea.appendChild(svg);
         }
@@ -592,20 +615,53 @@
                 container.appendChild(quarterDiv);
             });
 
-            // Track comment positions for collision detection
+            // Track comment positions for collision detection.
+            // Two comments only overlap if their boxes actually intersect
+            // horizontally, so derive the threshold from the real box width
+            // (130px, plus a 12px gutter) relative to the container width rather than a fixed %.
             const commentRows = {};
+            const commentWidthPct = ((130 + 12) / container.offsetWidth) * 100;
+
+            // Place labels so they don't overlap. Labels sit at 45deg, so each one
+            // lies on a diagonal line. Two labels on the same side are clear of each
+            // other when their diagonals are far enough apart. Work right to left,
+            // giving each marker the side and the shortest stem that clears the
+            // labels already placed to its right.
+            const MIN_STEM = 30;
+            const DIAGONAL_GAP = 26; // ~18px perpendicular clearance at 45deg
+            const LOOKAHEAD_PX = 300;
+            const containerWidth = container.offsetWidth;
+            const placements = new Array(models.length);
+            let prevSide = 'below';
+
+            for (let i = models.length - 1; i >= 0; i--) {
+                const x = getPositionInTimeline(parseDate(models[i].date), quarters) / 100 * containerWidth;
+                const stemFor = side => {
+                    let stem = MIN_STEM;
+                    for (let j = i + 1; j < models.length; j++) {
+                        const p = placements[j];
+                        if (p.x - x > LOOKAHEAD_PX) break;
+                        if (p.side === side) stem = Math.max(stem, p.stem - (p.x - x) + DIAGONAL_GAP);
+                    }
+                    return stem;
+                };
+                const above = stemFor('above');
+                const below = stemFor('below');
+                // Prefer the shorter stem; on a tie, alternate sides.
+                const side = above < below ? 'above'
+                    : below < above ? 'below'
+                    : (prevSide === 'above' ? 'below' : 'above');
+                placements[i] = { x, side, stem: side === 'above' ? above : below };
+                prevSide = side;
+            }
 
             // Render model markers
             models.forEach((model, idx) => {
                 const date = parseDate(model.date);
                 const pos = getPositionInTimeline(date, quarters);
 
-                const isAbove = idx % 2 === 0;
-                const stemHeightsAbove = [40, 50, 60, 45, 55];
-                const stemHeightsBelow = [40, 50, 60, 45, 55];
-                const stemHeight = isAbove
-                    ? stemHeightsAbove[idx % stemHeightsAbove.length]
-                    : stemHeightsBelow[idx % stemHeightsBelow.length];
+                const isAbove = placements[idx].side === 'above';
+                const stemHeight = placements[idx].stem;
 
                 const marker = document.createElement('div');
                 marker.className = 'marker';
@@ -622,7 +678,7 @@
                 if (model.comment) {
                     let commentTop = 200;
                     for (const [usedPos, row] of Object.entries(commentRows)) {
-                        if (Math.abs(parseFloat(usedPos) - pos) < 8) {
+                        if (Math.abs(parseFloat(usedPos) - pos) < commentWidthPct) {
                             commentTop = Math.max(commentTop, row + 90);
                         }
                     }
