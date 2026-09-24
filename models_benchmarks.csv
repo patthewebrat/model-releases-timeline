@@ -49,3 +49,5 @@ Q3 2026,Gemini 3.8 Flash,Google,9/2/26,,,,41.20%,Gemini 3.5 Pro still unreleased
 Q3 2026,GPT-6 Astra,OpenAI,9/3/26,,96.00%,,53.30%,HLE 57.2% w/tools only,OpenAI's largest training run and its first model rated Critical for cybersecurity
 Q3 2026,Grok 4.7,xAI,9/21/26,,,,,,
 Q3 2026,Claude Opus 5.5,Anthropic,9/22/26,,,61.40%,54.40%,HLE via Artificial Analysis,Opus 5.5 matches Fable 5.1 at 40% lower cost. OpenAI ships GPT-6 Sol and Luna 89 minutes later
+Q3 2026,GPT-6 Sol,OpenAI,9/22/26,,,,49.30%,No HLE/GPQA published,
+Q3 2026,GPT-6 Luna,OpenAI,9/22/26,,,,42.40%,No HLE/GPQA published,
