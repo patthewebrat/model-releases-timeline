@@ -233,22 +233,69 @@
             transform-origin: top left;
         }
 
-        .marker-comment strong {
+        .info-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 15px;
+            height: 15px;
+            margin-left: 4px;
+            padding: 0;
+            border: none;
+            border-radius: 50%;
+            background: var(--clr-scooter);
+            color: #ffffff;
             font-family: var(--font-heading);
-            font-weight: 600;
-            color: var(--clr-stratos);
+            font-size: 10px;
+            font-weight: 700;
+            line-height: 1;
+            vertical-align: middle;
+            cursor: pointer;
         }
 
-        .marker-comment {
+        /* Keep the "i" upright inside the rotated label */
+        .marker-label.above .info-btn { transform: rotate(45deg); }
+        .marker-label.below .info-btn { transform: rotate(-45deg); }
+
+        .info-btn:hover,
+        .info-btn[aria-expanded="true"] {
+            background: var(--clr-stratos);
+        }
+
+        .info-btn:focus-visible {
+            outline: 2px solid var(--clr-brilliant-rose);
+            outline-offset: 2px;
+        }
+
+        .comment-popover {
             position: absolute;
+            z-index: 200;
+            width: 240px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            background: var(--clr-stratos);
+            color: #ffffff;
             font-size: 13px;
-            color: var(--clr-emperor);
-            width: 130px;
-            line-height: 1.3;
-            text-align: left;
-            top: 200px;
-            left: 0;
-            transform: translateX(-50%);
+            line-height: 1.4;
+            box-shadow: 0 8px 24px rgba(0, 16, 61, 0.25);
+        }
+
+        .comment-popover[hidden] {
+            display: none;
+        }
+
+        .comment-popover strong {
+            display: block;
+            margin-bottom: 4px;
+            font-family: var(--font-heading);
+            font-weight: 600;
+        }
+
+        .comment-popover .popover-meta {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 11px;
+            color: var(--clr-geyser);
         }
 
         /* Footer styles */
@@ -330,6 +377,7 @@
         <div class="timeline-container" id="timeline">
             <div class="timeline-line"></div>
         </div>
+        <div class="comment-popover" id="commentPopover" role="dialog" aria-live="polite" hidden></div>
     </div>
 
     <footer class="footer">
@@ -615,9 +663,6 @@
                 container.appendChild(quarterDiv);
             });
 
-            // Comments are placed after render, once their real heights are known.
-            const comments = [];
-
             // Place labels so they don't overlap. Labels sit at 45deg, so each one
             // lies on a diagonal line. Two labels on the same side are clear of each
             // other when their diagonals are far enough apart. Work right to left,
@@ -665,68 +710,80 @@
 
                 const label = `${model.org} / ${model.model}`;
 
-                let html = `
+                const infoBtn = model.comment
+                    ? `<button type="button" class="info-btn" data-idx="${idx}" aria-expanded="false" aria-label="More about ${model.model}">i</button>`
+                    : '';
+
+                marker.innerHTML = `
                     <div class="marker-dot"></div>
                     <div class="marker-stem ${isAbove ? 'above' : 'below'}" style="height: ${stemHeight}px;"></div>
-                    <div class="marker-label ${isAbove ? 'above' : 'below'}" style="${isAbove ? 'bottom' : 'top'}: ${stemHeight + 8}px;">${label}</div>
+                    <div class="marker-label ${isAbove ? 'above' : 'below'}" style="${isAbove ? 'bottom' : 'top'}: ${stemHeight + 8}px;">${label}${infoBtn}</div>
                 `;
-
-                if (model.comment) {
-                    html += `<div class="marker-comment"><strong>${model.model}</strong><br>${model.comment}</div>`;
-                }
-
-                marker.innerHTML = html;
                 container.appendChild(marker);
-
-                const commentEl = marker.querySelector('.marker-comment');
-                if (commentEl) comments.push({ el: commentEl, x: pos / 100 * containerWidth });
             });
 
-            // Measure after web fonts load, or heights come out short.
-            document.fonts.ready.then(() => placeComments(container, comments));
+            setupCommentPopover(container, models);
         }
 
-        // Stack comment boxes without overlap. Each box goes in the highest free
-        // slot. It may slide sideways (up to MAX_SHIFT) if that lets it sit higher,
-        // so crowded periods spread into empty space nearby.
-        function placeComments(container, comments) {
-            const BASE_TOP = 200;
-            const GAP = 12;
-            const MAX_SHIFT = 200;
-            const SHIFT_STEP = 20;
-            const containerWidth = container.offsetWidth;
-            const placed = [];
+        // Show a model's comment in a popover when its "i" button is clicked.
+        // Click the button again, click elsewhere or press Escape to close.
+        function setupCommentPopover(container, models) {
+            const popover = document.getElementById('commentPopover');
+            let openBtn = null;
 
-            const topAt = (x, width, height) => {
-                const neighbours = placed.filter(p => Math.abs(p.x - x) < (width + p.width) / 2 + GAP);
-                const fits = top => neighbours.every(p => top + height + GAP <= p.top || top >= p.top + p.height + GAP);
-                return [BASE_TOP, ...neighbours.map(p => p.top + p.height + GAP)]
-                    .sort((a, b) => a - b)
-                    .find(fits);
+            const close = () => {
+                if (!openBtn) return;
+                openBtn.setAttribute('aria-expanded', 'false');
+                openBtn = null;
+                popover.hidden = true;
             };
 
-            comments.forEach(c => {
-                const width = c.el.offsetWidth;
-                const height = c.el.offsetHeight;
-                let best = null;
-                for (let shift = -MAX_SHIFT; shift <= MAX_SHIFT; shift += SHIFT_STEP) {
-                    const x = c.x + shift;
-                    if (x - width / 2 < 0 || x + width / 2 > containerWidth) continue;
-                    const top = topAt(x, width, height);
-                    // Prefer the highest slot; on a tie, the smallest shift.
-                    if (!best || top < best.top || (top === best.top && Math.abs(shift) < Math.abs(best.shift))) {
-                        best = { x, shift, top };
-                    }
-                }
+            const open = btn => {
+                const model = models[btn.dataset.idx];
+                popover.innerHTML = '';
+                const title = document.createElement('strong');
+                title.textContent = model.model;
+                const meta = document.createElement('span');
+                meta.className = 'popover-meta';
+                meta.textContent = `${model.org} · ${parseDate(model.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}`;
+                const body = document.createElement('span');
+                body.textContent = model.comment;
+                popover.append(title, meta, body);
+                popover.hidden = false;
 
-                c.el.style.top = `${best.top}px`;
-                c.el.style.left = `${best.shift}px`;
-                placed.push({ x: best.x, width, height, top: best.top });
+                // Sit just below the button, kept inside the viewport.
+                const r = btn.getBoundingClientRect();
+                const margin = 16;
+                const left = Math.min(
+                    Math.max(margin, r.left + r.width / 2 - popover.offsetWidth / 2),
+                    document.documentElement.clientWidth - popover.offsetWidth - margin
+                );
+                popover.style.left = `${left + window.scrollX}px`;
+                popover.style.top = `${r.bottom + 8 + window.scrollY}px`;
+
+                btn.setAttribute('aria-expanded', 'true');
+                openBtn = btn;
+            };
+
+            container.addEventListener('click', e => {
+                const btn = e.target.closest('.info-btn');
+                if (!btn) return;
+                e.stopPropagation();
+                const wasOpen = btn === openBtn;
+                close();
+                if (!wasOpen) open(btn);
             });
-
-            // Grow the timeline so the lowest comment clears the fixed footer.
-            const bottom = Math.max(0, ...placed.map(p => p.top + p.height));
-            container.style.height = `${Math.max(320, bottom + 20)}px`;
+            document.addEventListener('click', e => {
+                if (!popover.contains(e.target)) close();
+            });
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape') {
+                    const btn = openBtn;
+                    close();
+                    btn?.focus();
+                }
+            });
+            window.addEventListener('resize', close);
         }
 
         // Load timeline on page load
