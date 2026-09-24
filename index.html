@@ -615,12 +615,8 @@
                 container.appendChild(quarterDiv);
             });
 
-            // Track comment positions for collision detection.
-            // Two comments only overlap if their boxes actually intersect
-            // horizontally, so derive the threshold from the real box width
-            // (130px, plus a 12px gutter) relative to the container width rather than a fixed %.
-            const commentRows = {};
-            const commentWidthPct = ((130 + 12) / container.offsetWidth) * 100;
+            // Comments are placed after render, once their real heights are known.
+            const comments = [];
 
             // Place labels so they don't overlap. Labels sit at 45deg, so each one
             // lies on a diagonal line. Two labels on the same side are clear of each
@@ -676,20 +672,61 @@
                 `;
 
                 if (model.comment) {
-                    let commentTop = 200;
-                    for (const [usedPos, row] of Object.entries(commentRows)) {
-                        if (Math.abs(parseFloat(usedPos) - pos) < commentWidthPct) {
-                            commentTop = Math.max(commentTop, row + 90);
-                        }
-                    }
-                    commentRows[pos] = commentTop;
-
-                    html += `<div class="marker-comment" style="top: ${commentTop}px;"><strong>${model.model}</strong><br>${model.comment}</div>`;
+                    html += `<div class="marker-comment"><strong>${model.model}</strong><br>${model.comment}</div>`;
                 }
 
                 marker.innerHTML = html;
                 container.appendChild(marker);
+
+                const commentEl = marker.querySelector('.marker-comment');
+                if (commentEl) comments.push({ el: commentEl, x: pos / 100 * containerWidth });
             });
+
+            // Measure after web fonts load, or heights come out short.
+            document.fonts.ready.then(() => placeComments(container, comments));
+        }
+
+        // Stack comment boxes without overlap. Each box goes in the highest free
+        // slot. It may slide sideways (up to MAX_SHIFT) if that lets it sit higher,
+        // so crowded periods spread into empty space nearby.
+        function placeComments(container, comments) {
+            const BASE_TOP = 200;
+            const GAP = 12;
+            const MAX_SHIFT = 200;
+            const SHIFT_STEP = 20;
+            const containerWidth = container.offsetWidth;
+            const placed = [];
+
+            const topAt = (x, width, height) => {
+                const neighbours = placed.filter(p => Math.abs(p.x - x) < (width + p.width) / 2 + GAP);
+                const fits = top => neighbours.every(p => top + height + GAP <= p.top || top >= p.top + p.height + GAP);
+                return [BASE_TOP, ...neighbours.map(p => p.top + p.height + GAP)]
+                    .sort((a, b) => a - b)
+                    .find(fits);
+            };
+
+            comments.forEach(c => {
+                const width = c.el.offsetWidth;
+                const height = c.el.offsetHeight;
+                let best = null;
+                for (let shift = -MAX_SHIFT; shift <= MAX_SHIFT; shift += SHIFT_STEP) {
+                    const x = c.x + shift;
+                    if (x - width / 2 < 0 || x + width / 2 > containerWidth) continue;
+                    const top = topAt(x, width, height);
+                    // Prefer the highest slot; on a tie, the smallest shift.
+                    if (!best || top < best.top || (top === best.top && Math.abs(shift) < Math.abs(best.shift))) {
+                        best = { x, shift, top };
+                    }
+                }
+
+                c.el.style.top = `${best.top}px`;
+                c.el.style.left = `${best.shift}px`;
+                placed.push({ x: best.x, width, height, top: best.top });
+            });
+
+            // Grow the timeline so the lowest comment clears the fixed footer.
+            const bottom = Math.max(0, ...placed.map(p => p.top + p.height));
+            container.style.height = `${Math.max(320, bottom + 20)}px`;
         }
 
         // Load timeline on page load
