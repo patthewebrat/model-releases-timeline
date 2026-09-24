@@ -45,7 +45,8 @@
         .chart-container {
             position: relative;
             width: 100%;
-            height: 400px;
+            /* Fill the space the timeline and footer leave free */
+            height: clamp(400px, calc(100vh - 510px), 720px);
             margin-bottom: 60px;
         }
 
