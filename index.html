@@ -108,6 +108,15 @@
             background: repeating-linear-gradient(90deg, currentColor 0 5px, transparent 5px 8px);
         }
 
+        .legend-dotted {
+            background: repeating-linear-gradient(90deg, currentColor 0 2px, transparent 2px 5px);
+        }
+
+        .data-point.hollow {
+            background: #ffffff !important;
+            border: 2px solid;
+        }
+
         .data-point {
             position: absolute;
             width: 8px;
@@ -369,8 +378,16 @@
                     <span>HLE (%, right axis)</span>
                 </div>
                 <div class="legend-item">
+                    <div class="legend-color legend-dotted" style="color: #f57e21;"></div>
+                    <span>HLE-Diamond (%, right axis)</span>
+                </div>
+                <div class="legend-item">
                     <div class="legend-color legend-dashed" style="color: #F8659F;"></div>
-                    <span>FrontierCode (%, right axis)</span>
+                    <span>FrontierCode 1.1 (%, right axis)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-dotted" style="color: #F8659F;"></div>
+                    <span>FrontierCode 2.0 (%, right axis)</span>
                 </div>
             </div>
             <div class="chart-area" id="chartArea"></div>
@@ -404,7 +421,12 @@
             { key: 'mmlu', column: 'MMLU', label: 'MMLU', color: '#27b4d2', axis: 'left' },
             { key: 'gpqa', column: 'GPQA', label: 'GPQA Diamond', color: '#183159', axis: 'left' },
             { key: 'hle', column: 'HLE', label: 'HLE', color: '#f57e21', axis: 'right' },
-            { key: 'frontiercode', column: 'FrontierCode', label: 'FrontierCode', color: '#F8659F', axis: 'right' }
+            // HLE-Diamond is the refined 1,000-question HLE subset (from Sep 2026).
+            // Same colour as HLE, dotted with hollow points to mark the new version.
+            { key: 'hleDiamond', column: 'HLE-Diamond', label: 'HLE-Diamond', color: '#f57e21', axis: 'right', dotted: true },
+            { key: 'frontiercode', column: 'FrontierCode', label: 'FrontierCode 1.1', color: '#F8659F', axis: 'right' },
+            // FrontierCode 2.0 (Oct 2026) is a harder rebuild, so its scores are not comparable with 1.1.
+            { key: 'frontiercode2', column: 'FrontierCode 2.0', label: 'FrontierCode 2.0', color: '#F8659F', axis: 'right', dotted: true }
         ];
 
         // Parse CSV and build timeline
@@ -564,10 +586,22 @@
             const totalQuarters = quarters.length;
             const quarterWidth = 97 / totalQuarters;
 
-            // Y-axis range - dynamically calculate from data
-            const axisValues = axis => models.flatMap(m =>
-                SERIES.filter(s => s.axis === axis).map(s => m[s.key])
-            ).filter(v => v !== null);
+            // The chart shows the state of the art over time, so each line
+            // plots only the models that set a new record on that benchmark.
+            // Every model still appears on the timeline below.
+            const isRecord = Object.fromEntries(SERIES.map(s => {
+                let best = -Infinity;
+                return [s.key, models.map(m => {
+                    if (m[s.key] === null || m[s.key] <= best) return false;
+                    best = m[s.key];
+                    return true;
+                })];
+            }));
+
+            // Y-axis range - dynamically calculate from the plotted records
+            const axisValues = axis => SERIES.filter(s => s.axis === axis).flatMap(s =>
+                models.filter((m, i) => isRecord[s.key][i]).map(m => m[s.key])
+            );
 
             const axes = {
                 left: { min: Math.floor(Math.min(...axisValues('left')) / 10) * 10, max: 100 }, // Round down to nearest 10
@@ -604,14 +638,14 @@
             // Collect data points for lines
             const points = Object.fromEntries(SERIES.map(s => [s.key, []]));
 
-            models.forEach((model) => {
+            models.forEach((model, i) => {
                 const date = parseDate(model.date);
                 const xPos = getPositionInTimeline(date, quarters);
                 // Convert from page percentage to chart area percentage
                 const chartXPercent = ((xPos - 1.5) / 97) * 100;
 
                 SERIES.forEach(s => {
-                    if (model[s.key] === null) return;
+                    if (!isRecord[s.key][i]) return;
                     const yPercent = toY(model[s.key], s.axis);
                     points[s.key].push({ x: chartXPercent, y: yPercent, model: model });
 
@@ -620,6 +654,10 @@
                     point.style.left = `${chartXPercent}%`;
                     point.style.top = `${yPercent}%`;
                     point.style.background = s.color;
+                    if (s.dotted) {
+                        point.classList.add('hollow');
+                        point.style.borderColor = s.color;
+                    }
                     point.setAttribute('data-tooltip', `${model.model}: ${model[s.key]}% ${s.label}`);
                     chartArea.appendChild(point);
                 });
@@ -638,7 +676,8 @@
                 path.setAttribute('fill', 'none');
                 path.setAttribute('stroke', s.color);
                 path.setAttribute('stroke-width', '1.5');
-                if (s.axis === 'right') path.setAttribute('stroke-dasharray', '6 4');
+                if (s.dotted) path.setAttribute('stroke-dasharray', '2 3');
+                else if (s.axis === 'right') path.setAttribute('stroke-dasharray', '6 4');
                 path.setAttribute('vector-effect', 'non-scaling-stroke');
                 svg.appendChild(path);
             });
